@@ -1,0 +1,27 @@
+- !policy
+  id: jenkins
+  body:
+  - &variables
+    - !variable
+      id: postgres/username
+    - !variable
+      id: postgres/password
+    - !variable
+      id: git_username
+    - !variable
+      id: git_password    
+    - !variable
+      id: git_address
+
+  - !layer
+    id: jenkins_hosts
+  
+  - !host-factory
+    annotations:
+      description: HostFactory for Jenkins_hosts
+    layer: !layer jenkins_hosts
+
+  - !permit
+    role: !layer jenkins_hosts
+    privilege: [ read, execute ]
+    resources: *variables

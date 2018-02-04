@@ -1,0 +1,16 @@
+- !group
+  id: devops
+- !group 
+  id: admins
+
+- !grant
+  role: !group admins
+  member: !group devops
+
+- !grant
+  role: !group devops
+  member: !user bill
+
+- !grant
+  role: !group devops
+  member: !user jenkins-master

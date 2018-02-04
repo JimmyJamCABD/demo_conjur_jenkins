@@ -1,0 +1,8 @@
+- !include users.yml
+- !include groups.yml
+
+- !policy
+  id: Foundation
+  owner: !group devops
+  body:
+  - !include apps.yml
