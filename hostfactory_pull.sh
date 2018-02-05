@@ -9,10 +9,10 @@ function hostfactory_create(){
     #Create new hostfactory token
     local api=$(cat ~/.netrc | grep password | awk '$1=="password"{print $2}')
     printf "This is the API key = $api\n"
-    local auth_token=$(curl -s -k -H "Content-Type: text/plain" -X POST -d "$api" https://conjur-master/api/authn/users/jenkins-master/authenticate)
+    local auth_token=$(curl -s -k -H "Content-Type: text/plain" -X POST -d "$api" https://conjur-master/api/authn/users/admin/authenticate)
     local token=$(echo -n $auth_token | base64 | tr -d '\r\n')
     printf "\nThe token is: $token\n"
-    local hostfactory_search=$(curl -s -k -X GET -H "Authorization: Token token=\"$token\"" https://conjur-master/api/authz/jenkins-master/resources/host_factory | jq '.[] | .id ')
+    local hostfactory_search=$(curl -s -k -X GET -H "Authorization: Token token=\"$token\"" https://conjur-master/api/authz/admin/resources/host_factory | jq '.[] | .id ')
     printf "\nThe list of hostfactories:\n$hostfactory_search\n"
     local date=$(date --iso-8601)
     local time_hours=$(date +%H)
