@@ -12,11 +12,6 @@ pipeline {
 				sh 'curl -s -k -i -X GET https://conjur-master/health'
 			}
 		}
-		stage ('Update Policy') {
-			steps {
-				sh 'conjur policy load --as-group security_admin ./policy/policy.yml'
-			}
-		}
 		stage ('Set secret Variable') {
 			steps {
 				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
