@@ -17,6 +17,11 @@ pipeline {
 				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
 			}
 		}
+		stage ('Pull secret variable using Summon') {
+			steps {
+				sh 'summon python pythonAccess.py'
+			}
+		}
 		stage ('Pull secret variable using shell') {
 			steps {
 				sh 'conjur variable value Foundation/jenkins/git_username'
