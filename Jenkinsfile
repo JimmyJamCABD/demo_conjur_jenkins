@@ -12,11 +12,6 @@ pipeline {
 				sh 'curl -s -k -i -X GET https://conjur-master/health'
 			}
 		}
-		stage ('Set secret Variable') {
-			steps {
-				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
-			}
-		}
 		stage ('Pull secret using Summon') {
 			steps {
 				sh 'summon python pythonAccess.py'
@@ -40,6 +35,11 @@ pipeline {
 		stage ('Create hostfactory token, grab new machine identity, and pull secret') {
 			steps {
 				sh 'chmod +x hostfactory_pull.sh && ./hostfactory_pull.sh'
+			}
+		}
+		stage ('Set secret Variable') {
+			steps {
+				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
 			}
 		}
 	}
