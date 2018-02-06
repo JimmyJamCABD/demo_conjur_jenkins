@@ -24,7 +24,7 @@ pipeline {
 		}
 		stage ('Set secret Variable') {
 			steps {
-				sh 'conjur variable values add Foundation/jenkins/git_username USER-$(date + "%H-%M")'
+				sh 'conjur variable values add Foundation/jenkins/git_username USER-$(date +"%H-%M")'
 			}
 		}
 		stage ('Pull secret using script') {
