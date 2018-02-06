@@ -22,6 +22,11 @@ pipeline {
 				sh 'conjur variable value Foundation/jenkins/git_username'
 			}
 		}
+		stage ('Set secret Variable') {
+			steps {
+				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
+			}
+		}
 		stage ('Pull secret using script') {
 			steps {
 				sh 'chmod +x ./pull_secret.sh && ./pull_secret.sh'
@@ -35,11 +40,6 @@ pipeline {
 		stage ('Create hostfactory token, grab new machine identity, and pull secret') {
 			steps {
 				sh 'chmod +x hostfactory_pull.sh && ./hostfactory_pull.sh'
-			}
-		}
-		stage ('Set secret Variable') {
-			steps {
-				sh 'conjur variable values add Foundation/jenkins/git_username CaptainFluffyToes'
 			}
 		}
 	}
