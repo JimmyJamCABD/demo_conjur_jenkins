@@ -19,7 +19,7 @@ pipeline {
 		}
 		stage ('Pull secret using shell') {
 			steps {
-				sh 'conjur variable value Foundation/jenkins/git_username'
+				sh 'echo `conjur variable value Foundation/jenkins/git_username`'
 			}
 		}
 		stage ('Set secret Variable') {
